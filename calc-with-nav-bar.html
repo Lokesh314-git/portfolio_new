@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator1</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        input {
+            margin-left: 50px;
+            width: 250px;
+            height: 30px;
+            margin-bottom: 20px;
+            margin-top: 5px;
+            border-radius: 10px;
+            opacity: 0.6;
+        }
+
+        body {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .box {
+            width: 415px;
+            height: 500px;
+            border-width: 2px;
+            border-style: solid;
+            box-shadow: 0 0 20px;
+            border-radius: 15px;
+            background-image: url("https://w0.peakpx.com/wallpaper/730/501/HD-wallpaper-iphone-14-pro-thumbnail.jpg");
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-cont {
+            position: relative;
+            background: rgb(0, 0, 0);
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px black;
+            margin: 20px auto;
+            width: fit-content;
+        }
+
+        .button-container {
+            position: relative;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .button-container button {
+            position: relative;
+            width: 70px;
+            height: 30px;
+            margin: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #fff;
+            background: transparent;
+            border: none;
+            transition: 0.3s;
+            z-index: 2;
+        }
+
+        .button-container button.active {
+            color: rgba(0, 0, 0, 0.785);
+        }
+
+        .highlight {
+            position: absolute;
+            background: rgb(214, 114, 250);
+            height: 100%;
+            width: 70px;
+            top: 0;
+            left: 0;
+            border-radius: 10px;
+            transition: 0.3s;
+            z-index: 1;
+        }
+
+        .button-container button::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: rgb(61, 5, 72);
+            transition: 0.3s;
+        }
+
+        .button-container button:hover::before {
+            width: 80%;
+        }
+
+        .button-container button:active::before {
+            width: 0;
+        }
+
+        #result {
+            text-align: center;
+            height:35px;
+            margin-top: 40px;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px rgb(0, 0, 0);
+            border-style: solid;
+            color: rgb(255, 255, 255);
+            font-family:'Times New Roman', Times, serif ;
+            font-size: larger;
+            border-color: #ffffff00;
+            border-radius: 50px;
+            background-color: #ffffff5e;
+        }
+
+        label {
+            color: #fff;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Calculator</h1>
+        <form>
+            <label for="num-1">Enter no 1: </label>
+            <input type="number" id="num-1" required><br>
+            <label for="num-2">Enter no 2: </label>
+            <input type="number" id="num-2" required>
+        </form>
+        <div class="nav-cont">
+            <div class="button-container">
+                <div class="highlight"></div>
+                <button class="active" onclick="calculate('add')">Add</button>
+                <button onclick="calculate('subtract')">Subtract</button>
+                <button onclick="calculate('multiply')">Multiply</button>
+                <button onclick="calculate('divide')">Divide</button>
+            </div>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculate(operation) {
+            const num1 = parseFloat(document.getElementById('num-1').value);
+            const num2 = parseFloat(document.getElementById('num-2').value);
+            let result;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('result').innerText = "Please enter valid numbers";
+                return;
+            }
+
+            // Update active button
+            const buttons = document.querySelectorAll('.button-container button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const activeButton = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(operation));
+            activeButton.classList.add('active');
+
+            // Move highlight to active button
+            const highlight = document.querySelector('.highlight');
+            highlight.style.width = activeButton.offsetWidth + 'px';
+            highlight.style.left = activeButton.offsetLeft + 'px';
+
+            switch (operation) {
+                case 'add':
+                    result = num1 + num2;
+                    document.getElementById('result').innerText = `Result: ${num1} + ${num2} = ${result}`;
+                    break;
+                case 'subtract':
+                    result = num1 - num2;
+                    document.getElementById('result').innerText = `Result: ${num1} - ${num2} = ${result}`;
+                    break;
+                case 'multiply':
+                    result = num1 * num2;
+                    document.getElementById('result').innerText = `Result: ${num1} × ${num2} = ${result}`;
+                    break;
+                case 'divide':
+                    if (num2 === 0) {
+                        document.getElementById('result').innerText = "Cannot divide by zero";
+                    } else {
+                        result = num1 / num2;
+                        document.getElementById('result').innerText = `Result: ${num1} ÷ ${num2} = ${result.toFixed(2)}`;
+                    }
+                    break;
+                default:
+                    document.getElementById('result').innerText = "Invalid operation";
+            }
+        }
+
+        const buttonContainer = document.querySelector('.button-container');
+        const highlight = document.querySelector('.highlight');
+        const buttons = document.querySelectorAll('.button-container button');
+
+        // Set initial highlight position and width
+        const initialActive = document.querySelector('.button-container button.active');
+        highlight.style.width = initialActive.offsetWidth + 'px';
+        highlight.style.left = initialActive.offsetLeft + 'px';
+
+        buttons.forEach((button) => {
+            button.addEventListener('mouseenter', () => {
+                highlight.style.width = button.offsetWidth + 'px';
+                highlight.style.left = button.offsetLeft + 'px';
+            });
+        });
+
+        // Reset highlight to active button on mouseleave
+        buttonContainer.addEventListener('mouseleave', () => {
+            const activeButton = document.querySelector('.button-container button.active');
+            highlight.style.width = activeButton.offsetWidth + 'px';
+            highlight.style.left = activeButton.offsetLeft + 'px';
+        });
+    </script>
+</body>
+</html>

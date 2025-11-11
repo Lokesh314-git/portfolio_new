@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 0;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 18px;
+      text-shadow: 0 0 5px #00ffff;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #ff00ff;
+      text-shadow: 0 0 15px #ff00ff;
+    }
+
+    .container {
+      padding: 20px;
+      background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgba(255, 0, 255, 0.3), 0 0 60px rgba(0, 255, 255, 0.2);
+      margin-top: 80px;
+      width: 90%;
+      max-width: 800px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 60px rgba(255, 0, 255, 0.5), 0 0 80px rgba(0, 255, 255, 0.4);
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #000000;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      margin: 15px 0;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      font-size: 18px;
+      color: #000000;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 300px;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      transition: box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ff00ff, #00ffff);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px 5px;
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+    }
+
+    .income-box, .expenses-box, .balance-box, .suggestions-box {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+
+    .income-box h3, .expenses-box h3, .balance-box h3, .suggestions-box h3 {
+      color: #000000;
+      text-shadow: 0 0 5px #00ffff;
+      margin: 0;
+    }
+
+    .expense-list {
+      margin: 20px 0;
+      text-align: left;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .expense-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      margin: 5px 0;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    }
+
+    .expense-item span {
+      color: #000000;
+      font-size: 16px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1001;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgba(255, 0, 255, 0.5);
+      z-index: 1002;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .amount-group {
+      margin: 15px 0;
+    }
+
+    .progress-bar {
+      width: 100%;
+      max-width: 300px;
+      height: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(135deg, #ff00ff, #00ffff);
+      text-align: center;
+      line-height: 20px;
+      color: #ffffff;
+      font-size: 14px;
+      transition: width 0.5s ease;
+    }
+
+    #expenseChart {
+      width: 400px !important;
+      height: 400px !important;
+      margin: 20px auto;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .login-container, .register-container {
+      padding: 20px;
+      background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgba(255, 0, 255, 0.3), 0 0 60px rgba(0, 255, 255, 0.2);
+      margin-top: 80px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .login-container:hover, .register-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 60px rgba(255, 0, 255, 0.5), 0 0 80px rgba(0, 255, 255, 0.4);
+    }
+
+    .login-container h1, .register-container h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .link-text {
+      color: #000000;
+      text-shadow: 0 0 5px #00ffff;
+      text-decoration: none;
+      font-size: 14px;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .link-text:hover {
+      color: #ff00ff;
+      text-shadow: 0 0 15px #ff00ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar" id="navbar">
+    <a href="#login">Login</a>
+    <a href="#register">Register</a>
+  </div>
+
+  <!-- Login Page -->
+  <div class="login-container container" id="login">
+    <h1>Login</h1>
+    <div class="input-group">
+      <label for="loginUsername">Username:</label>
+      <input type="text" id="loginUsername" placeholder="Enter username">
+    </div>
+    <div class="input-group">
+      <label for="loginPassword">Password:</label>
+      <input type="password" id="loginPassword" placeholder="Enter password">
+    </div>
+    <button id="loginBtn">Login</button>
+    <a href="#register" class="link-text">Don't have an account? Register here</a>
+  </div>
+
+  <!-- Registration Page -->
+  <div class="register-container container hidden" id="register">
+    <h1>Register</h1>
+    <div class="input-group">
+      <label for="regUsername">Username:</label>
+      <input type="text" id="regUsername" placeholder="Enter username">
+    </div>
+    <div class="input-group">
+      <label for="regEmail">Email:</label>
+      <input type="email" id="regEmail" placeholder="Enter email">
+    </div>
+    <div class="input-group">
+      <label for="regPassword">Password:</label>
+      <input type="password" id="regPassword" placeholder="Enter password">
+    </div>
+    <div class="input-group">
+      <label for="regConfirmPassword">Confirm Password:</label>
+      <input type="password" id="regConfirmPassword" placeholder="Confirm password">
+    </div>
+    <button id="registerBtn">Register</button>
+    <a href="#login" class="link-text">Already have an account? Login here</a>
+  </div>
+
+  <!-- Expenses Page -->
+  <div class="container hidden" id="expenses">
+    <h1>Expenses</h1>
+    <div class="input-group">
+      <label for="income">Monthly Income (₹):</label>
+      <input type="number" id="income" placeholder="Enter income">
+    </div>
+    <button id="addExpenseBtn">Add Expense</button>
+    <div class="income-box">
+      <h3>Income: ₹<span id="displayIncome">0</span></h3>
+    </div>
+    <div class="expenses-box">
+      <h3>Expenses: ₹<span id="displayExpenses">0</span></h3>
+    </div>
+    <div class="balance-box">
+      <h3>Balance: ₹<span id="balance">0</span></h3>
+    </div>
+    <div class="expense-list" id="expenseList"></div>
+    <canvas id="expenseChart"></canvas>
+    <div class="suggestions-box" id="suggestionsBox">
+      <h3>AI Suggestions to Reduce Expenses</h3>
+      <ul id="suggestionsList"></ul>
+    </div>
+  </div>
+
+  <!-- Popup for Adding/Editing Expenses -->
+  <div class="overlay hidden" id="overlay"></div>
+  <div class="popup hidden" id="popup">
+    <h2 id="popupTitle">Add Expense</h2>
+    <label for="expenseCategory">Category:</label>
+    <select id="expenseCategory">
+      <optgroup label="Primary Expenses">
+        <option value="groceries">Groceries</option>
+        <option value="food">Food</option>
+        <option value="rent">Rent</option>
+        <option value="transportation">Transportation</option>
+        <option value="dress">Dress</option>
+      </optgroup>
+      <optgroup label="Secondary Expenses">
+        <option value="entertainment">Entertainment</option>
+        <option value="furniture">Furniture</option>
+        <option value="electronics">Electronics</option>
+        <option value="vacations">Vacations</option>
+      </optgroup>
+    </select>
+    <div class="amount-group">
+      <label for="expenseAmount">Amount (₹):</label>
+      <input type="number" id="expenseAmount" placeholder="Enter amount">
+    </div>
+    <button id="saveExpenseBtn">Save</button>
+    <button id="addAnotherExpenseBtn">Add Another</button>
+    <button id="closePopupBtn">Close</button>
+  </div>
+
+  <!-- Goals Page -->
+  <div class="container hidden" id="goals">
+    <h1>Goals</h1>
+    <div class="input-group">
+      <label for="goalName">Goal Name:</label>
+      <input type="text" id="goalName" placeholder="Enter goal name">
+    </div>
+    <div class="input-group">
+      <label for="goalAmount">Goal Amount (₹):</label>
+      <input type="number" id="goalAmount" placeholder="Enter amount">
+    </div>
+    <div class="input-group">
+      <label for="timeframe">Timeframe (months):</label>
+      <input type="number" id="timeframe" placeholder="Enter months">
+    </div>
+    <button id="calculateSavingsBtn">Calculate Savings</button>
+    <h3 id="savingsResult"></h3>
+    <div class="input-group">
+      <label for="savedAmount">Amount Saved (₹):</label>
+      <input type="number" id="savedAmount" placeholder="Enter saved amount">
+    </div>
+    <button id="updateProgressBtn">Update Progress</button>
+    <div class="progress-bar">
+      <div id="progressBarFill" class="progress-bar-fill" style="width: 0%;">0%</div>
+    </div>
+  </div>
+
+  <!-- Avoid Expenses Page -->
+  <div class="container hidden" id="avoid-expenses">
+    <h1>Avoid Expenses</h1>
+    <ul style="list-style: none; padding: 0; font-size: 18px;">
+      <li><h2><strong>Income & Savings Ideas</strong></h2></li>  
+      <ul>1. 50/30/20 Rule – Allocate 50% of income for needs, 30% for wants, and 20% for savings/investments.</ul> 
+      <ul>2. Emergency Fund – Save at least 3–6 months' worth of expenses in a high-yield savings account.</ul> 
+      <ul>3. Automate Savings – Set up automatic transfers to your savings or investment accounts.</ul>
+      <ul>4. Side Hustles – Explore freelance work, online tutoring, blogging, or e-commerce to increase income.</ul>
+      <ul>5. Passive Income Streams – Invest in dividend stocks, rental properties, or create digital products.</ul>
+      <hr>
+      <ul><h2>Investment Ideas</h2></ul>
+      <ul>1. Stock Market – Invest in ETFs, index funds, or individual stocks for long-term growth.</ul>
+      <ul>2. Real Estate – Consider rental properties or REITs (Real Estate Investment Trusts) for passive income.</ul>
+      <ul>3. Cryptocurrency – Diversify a small portion into Bitcoin, Ethereum, or stablecoins.</ul>
+      <ul>4. Bonds & Fixed Deposits – For safer, low-risk returns.</ul>
+      <ul>5. Gold & Commodities – Hedge against inflation with gold, silver, or commodities.</ul>
+      <hr>
+      <ul><h2>Expense Management & Budgeting</h2></ul> 
+      <ul>1. Track Expenses – Use apps like Mint or YNAB to monitor spending.</ul>
+      <ul>2. Cut Unnecessary Subscriptions – Review monthly services and cancel unused ones.</ul>
+      <ul>3. Use Cashback & Rewards Cards – Optimize credit card usage for cashback and points.</ul>
+      <ul>4. Bulk Buy Essentials – Save money on groceries and household items.</ul>
+      <ul>5. Cook at Home – Reduce spending on dining out.</ul>
+      <hr>
+      <ul><h2>Debt Management</h2></ul> 
+      <ul>1. Pay Off High-Interest Debt First – Use the avalanche method to eliminate costly debts.</ul>  
+      <ul>2. Debt Snowball Method – Pay off smallest debts first to gain momentum.</ul>
+      <ul>3. Negotiate Interest Rates – Contact banks to lower your credit card or loan interest rates.</ul>  
+      <ul>4. Refinance Loans – If you have student loans or a mortgage, consider refinancing for better rates.</ul>
+      <ul>5. Avoid Unnecessary Loans – Only borrow for essential investments like education or home purchases.</ul>  
+      <hr>
+      <ul><h2>Smart Financial Planning</h2></ul> 
+      <ul>1. Set Financial Goals – Short-term (vacation), medium-term (buying a car), long-term (retirement).</ul>  
+      <ul>2. Retirement Planning – Start investing in retirement accounts early for compound growth.</ul>
+      <ul>3. Tax Optimization – Use tax-saving investments and deductions to reduce tax liabilities.</ul>  
+      <ul>4. Estate Planning – Create a will or trust to secure your assets for the future.</ul>
+      <ul>5. Increase Financial Literacy – Read books, take courses, and stay updated on market trends.</ul>
+      <hr>
+    </ul>
+  </div>
+
+  <script>
+    const API_BASE = 'api.php'; // Update this if your API is in a different location
+    let authToken = localStorage.getItem('authToken');
+    let userId = localStorage.getItem('userId');
+    let isLoggedIn = !!authToken;
+    
+    // Update the initialize function
+    function initialize() {
+      checkLoginStatus();
+      
+      // Update event listeners to use API calls
+      document.getElementById('loginBtn').addEventListener('click', handleLogin);
+      document.getElementById('registerBtn').addEventListener('click', handleRegister);
+      document.getElementById('addExpenseBtn').addEventListener('click', () => openPopup());
+      document.getElementById('saveExpenseBtn').addEventListener('click', saveExpense);
+      document.getElementById('addAnotherExpenseBtn').addEventListener('click', addAnotherExpense);
+      document.getElementById('closePopupBtn').addEventListener('click', closePopup);
+      document.getElementById('calculateSavingsBtn').addEventListener('click', calculateSavings);
+      document.getElementById('updateProgressBtn').addEventListener('click', updateProgress);
+      
+      // Navigation
+      document.getElementById('navbar').addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = e.target.getAttribute('href')?.substring(1);
+        if (page && page !== 'login' && page !== 'register' && !isLoggedIn) {
+          showPage('login');
+        } else if (page && e.target.id !== 'logoutBtn') {
+          showPage(page);
+        } else if (e.target.id === 'logoutBtn') {
+          logout();
+        }
+      });
+      
+      // Load income when expenses page is shown
+      document.getElementById('income').addEventListener('change', updateIncome);
+    }
+
+    // API helper functions
+    async function apiCall(endpoint, method = 'GET', data = null) {
+      const options = {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      
+      if (authToken) {
+        options.headers.Authorization = `Bearer ${authToken}`;
+      }
+      
+      if (data && (method === 'POST' || method === 'PUT')) {
+        options.body = JSON.stringify(data);
+      }
+      
+      try {
+        const response = await fetch(`${API_BASE}/${endpoint}`, options);
+        const result = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(result.error || 'API request failed');
+        }
+        
+        return result;
+      } catch (error) {
+        console.error('API call error:', error);
+        alert(error.message);
+        throw error;
+      }
+    }
+
+    // Updated authentication functions
+    async function handleLogin() {
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      if (!username || !password) {
+        alert("Please enter both username and password.");
+        return;
+      }
+      
+      try {
+        const result = await apiCall('login', 'POST', { username, password });
+        authToken = result.token;
+        userId = result.user_id;
+        isLoggedIn = true;
+        
+        localStorage.setItem('authToken', authToken);
+        localStorage.setItem('userId', userId);
+        localStorage.setItem('loginTimestamp', Date.now());
+        
+        updateNavbar();
+        showPage('expenses');
+        loadData();
+      } catch (error) {
+        // Error is already handled in apiCall
+      }
+    }
+
+    async function handleRegister() {
+      const username = document.getElementById('regUsername').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+      const confirmPassword = document.getElementById('regConfirmPassword').value;
+      
+      if (!username || !email || !password || !confirmPassword) {
+        alert("Please fill in all fields.");
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+      
+      try {
+        await apiCall('register', 'POST', { username, email, password });
+        alert("Registration successful! Please log in.");
+        showPage('login');
+      } catch (error) {
+        // Error is already handled in apiCall
+      }
+    }
+
+    async function logout() {
+      try {
+        await apiCall('logout', 'POST');
+      } catch (error) {
+        // Even if the API call fails, we'll clear local data
+      }
+      
+      // Clear local data
+      authToken = null;
+      userId = null;
+      isLoggedIn = false;
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('loginTimestamp');
+      
+      updateNavbar();
+      showPage('login');
+    }
+
+    // Updated data loading functions
+    async function loadData() {
+      if (!isLoggedIn) return;
+      
+      try {
+        // Load income
+        const incomeResult = await apiCall('income');
+        document.getElementById('income').value = incomeResult.income;
+        
+        // Load expenses
+        const expensesResult = await apiCall('expenses');
+        expenses = expensesResult.expenses;
+        
+        // Load goals
+        const goalsResult = await apiCall('goals');
+        if (goalsResult.goals && goalsResult.goals.length > 0) {
+          const goal = goalsResult.goals[0]; // Using first goal for simplicity
+          goalName = goal.goal_name;
+          goalAmount = parseFloat(goal.goal_amount);
+          savedAmount = parseFloat(goal.saved_amount);
+          document.getElementById('goalName').value = goalName;
+          document.getElementById('goalAmount').value = goalAmount;
+          document.getElementById('savedAmount').value = savedAmount;
+          const progress = (savedAmount / goalAmount) * 100 || 0;
+          document.getElementById('progressBarFill').style.width = `${progress}%`;
+          document.getElementById('progressBarFill').textContent = `${progress.toFixed(2)}%`;
+        }
+        
+        updateFinance();
+      } catch (error) {
+        console.error('Error loading data:', error);
+      }
+    }
+
+    async function updateIncome() {
+      const income = parseFloat(document.getElementById('income').value) || 0;
+      try {
+        await apiCall('income', 'POST', { amount: income });
+        updateFinance();
+      } catch (error) {
+        console.error('Error updating income:', error);
+      }
+    }
+
+    async function saveExpense() {
+      const category = document.getElementById('expenseCategory').value;
+      const amount = parseFloat(document.getElementById('expenseAmount').value);
+      
+      if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid positive amount.");
+        return;
+      }
+      
+      try {
+        if (editingCategory) {
+          await apiCall('expenses', 'PUT', { category: editingCategory, amount });
+        } else {
+          await apiCall('expenses', 'POST', { category, amount });
+        }
+        
+        updateFinance();
+        closePopup();
+      } catch (error) {
+        console.error('Error saving expense:', error);
+      }
+    }
+
+    async function addAnotherExpense() {
+      const category = document.getElementById('expenseCategory').value;
+      const amount = parseFloat(document.getElementById('expenseAmount').value);
+      
+      if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid positive amount.");
+        return;
+      }
+      
+      try {
+        await apiCall('expenses', 'POST', { category, amount });
+        updateFinance();
+        document.getElementById('expenseCategory').value = 'groceries';
+        document.getElementById('expenseAmount').value = '';
+        editingCategory = null;
+      } catch (error) {
+        console.error('Error adding expense:', error);
+      }
+    }
+
+    async function calculateSavings() {
+      goalName = document.getElementById('goalName').value;
+      goalAmount = parseFloat(document.getElementById('goalAmount').value);
+      const timeframe = parseFloat(document.getElementById('timeframe').value);
+      
+      if (!goalName || isNaN(goalAmount) || isNaN(timeframe)) {
+        alert("Please enter valid details.");
+        return;
+      }
+      
+      try {
+        await apiCall('goals', 'POST', {
+          goal_name: goalName,
+          goal_amount: goalAmount,
+          timeframe: timeframe
+        });
+        
+        const monthlySavings = goalAmount / timeframe;
+        document.getElementById('savingsResult').innerText = `To achieve "${goalName}", save ₹${monthlySavings.toFixed(2)}/month.`;
+      } catch (error) {
+        console.error('Error saving goal:', error);
+      }
+    }
+
+    async function updateProgress() {
+      savedAmount = parseFloat(document.getElementById('savedAmount').value);
+      
+      if (isNaN(savedAmount)) {
+        alert("Please enter a valid amount.");
+        return;
+      }
+      
+      try {
+        // For simplicity, we're assuming there's only one goal
+        const goalsResult = await apiCall('goals');
+        if (goalsResult.goals && goalsResult.goals.length > 0) {
+          const goalId = goalsResult.goals[0].id;
+          await apiCall('goals', 'PUT', {
+            goal_id: goalId,
+            saved_amount: savedAmount
+          });
+        }
+        
+        const progress = (savedAmount / goalAmount) * 100;
+        document.getElementById('progressBarFill').style.width = `${progress}%`;
+        document.getElementById('progressBarFill').textContent = `${progress.toFixed(2)}%`;
+      } catch (error) {
+        console.error('Error updating goal:', error);
+      }
+    }
+
+    // The rest of your existing JavaScript functions remain the same
+    // (updateFinance, generateSuggestions, checkLoginStatus, etc.)
+  </script>
+</body>
+</html>
