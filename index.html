@@ -1,19 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Core Meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lokesh | Portfolio</title>
-    <meta name="google-site-verification" content="JWRx7clq-RKs3Ekt8z7RndVn5M9SSgJ7vrmgnhaYUz8" />
-	<meta name="Description" content="Lokesk" />
-	<meta name="Keyword" content="Lokesh" />
-	<meta name="Author" content="Lokesh" />
-	<meta name="Description" content="Loki" />
-	<meta name="Keyword" content="Loki" />
-	<meta name="Author" content="Loki" />
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://lokesh314-git.github.io/portfolio_new/">
 
+    <!-- SEO Title & Description -->
+    <title>Lokesh | Web Developer & AI/ML Student in Villupuram</title>
+    <meta name="description" content="Lokesh – B.Sc. Computer Science student specializing in Web Development, Python, and AI/ML. View projects: WhatsApp Automation, Expense Tracker, Calculators. Based in Chennai, India.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Lokesh | Web Developer & AI/ML Student">
+    <meta property="og:description" content="Portfolio of Lokesh – Web Developer with skills in HTML, CSS, JavaScript, Python. View live projects and Microsoft Azure AI certifications.">
+    <meta property="og:image" content="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.BcMPlJ3geqpVzVvJ0MFiCAHaHb%3Fpid%3DApi&f=1">
+    <meta property="og:url" content="https://lokesh314-git.github.io/portfolio_new/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lokesh | Web Developer & AI/ML Student">
+    <meta name="twitter:description" content="Explore projects in Python, JavaScript, and web development. Microsoft-certified in Azure AI.">
+    <meta name="twitter:image" content="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.BcMPlJ3geqpVzVvJ0MFiCAHaHb%3Fpid%3DApi">
+
+    <!-- Favicon & Apple Touch -->
     <link rel="icon" href="https://img.icons8.com/?size=128&id=44834&format=png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/?size=128&id=44834&format=png">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- JSON-LD: Person Schema (Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Lokesh",
+      "alternateName": "Lokesh A",
+      "jobTitle": "Web Developer & AI/ML Student",
+      "url": "https://lokesh314-git.github.io/portfolio_new/",
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.BcMPlJ3geqpVzVvJ0MFiCAHaHb%3Fpid%3DApi",
+      "description": "B.Sc. Computer Science student at Takshashila University, specializing in Web Development (HTML, CSS, JavaScript), Python automation, and AI/ML. Microsoft Azure AI certified.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Villupuram",
+        "addressRegion": "TN",
+        "addressCountry": "IN"
+      },
+      "email": "lokesh.8637427067@gmail.com",
+      "telephone": "+918637427067",
+      "sameAs": [
+        "https://www.linkedin.com/in/lokesh-a-875b433323/"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Takshashila University"
+      },
+      "knowsAbout": ["Web Development", "Python", "JavaScript", "HTML/CSS", "Artificial Intelligence", "Machine Learning"],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Microsoft Azure AI Fundamentals",
+          "credentialCategory": "Certification",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Microsoft"
+          },
+          "dateCreated": "2025"
+        }
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD: Portfolio Projects -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "CreativeWork",
+          "name": "WhatsApp Prank Automation",
+          "description": "Python GUI tool to send automated prank messages via WhatsApp",
+          "creator": { "@type": "Person", "name": "Lokesh" },
+          "programmingLanguage": "Python",
+          "url": "https://lokesh314-git.github.io/portfolio_new/Auto_whatsapp_message.py"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "Expense Tracker Web App",
+          "description": "Responsive budget tracker with goal-setting and visual reports",
+          "creator": { "@type": "Person", "name": "Lokesh" },
+          "programmingLanguage": "HTML, CSS, JavaScript",
+          "url": "https://lokesh314-git.github.io/portfolio_new/Finai.html"
+        }
+      ]
+    }
+    </script>
+
     <style>
         /* Global Styles and Variables */
         :root {
@@ -692,10 +777,6 @@
                 font-size: 2rem;
             }
             
-            .certificates-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .certificate-gallery {
                 grid-template-columns: 1fr;
             }
@@ -708,26 +789,25 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav id="navbar">
-        <a href="#" class="logo">
-            <i class="fas fa-code"></i>
-            Lokesh
+    <!-- Navigation -->
+    <nav id="navbar" aria-label="Main navigation">
+        <a href="#" class="logo" aria-label="Lokesh Portfolio Home">
+            <i class="fas fa-code"></i> Lokesh
         </a>
         <ul class="nav-links">
             <li><a href="#profile">Profile</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#certificate-photos">Certificate</a></li>
+            <li><a href="#certificate-photos">Certificates</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Hello, I'm Lokesh</h1>
-            <p>A passionate B.Sc. Computer Science student specializing in Artificial Intelligence and Machine Learning at Takshashila University.</p>
+            <h1>Hello, I'm Lokesh.A</h1>
+            <p>A passionate B.Sc. Computer Science student specializing in <strong>Artificial Intelligence and Machine Learning</strong> at Takshashila University, Chennai.</p>
             <a href="#contact" class="hero-btn">Get in Touch <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
@@ -739,17 +819,20 @@
         </div>
         <div class="profile-content">
             <div class="profile-img">
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.BcMPlJ3geqpVzVvJ0MFiCAHaHb%3Fpid%3DApi&f=1&ipt=dc5867b21ec5c2c98c370674325fbb17e5dbd4e15ff0d002ae1a3646c10110fb&ipo=images" alt="Profile Image">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.BcMPlJ3geqpVzVvJ0MFiCAHaHb%3Fpid%3DApi&f=1&ipt=dc5867b21ec5c2c98c370674325fbb17e5dbd4e15ff0d002ae1a3646c10110fb&ipo=images" 
+                     alt="Lokesh – Web Developer and AI/ML Student in Chennai" loading="lazy">
             </div>
             <div class="profile-text">
                 <h3>Web Developer</h3>
-                <p>Hi, I'm Lokesh, a passionate web developer With over 3 Month of experience in front-end development, I specialize in creating innovative solutions that blend creativity with functionality.<br><hr>
-My journey began when I discovered my love for coding during college while building my first webpage. Since then, I'm proficient in tools and technologies like <mark>HTML/CSS, Python, Java</mark>.
- I'm always eager to collaborate on exciting projects—feel free to reach out!</p>
+                <p>Hi, I'm Lokesh, a passionate web developer with over 3 months of hands-on experience in front-end development. I specialize in creating innovative solutions that blend creativity with functionality.<br><hr>
+                My journey began when I discovered my love for coding during college while building my first webpage. Since then, I'm proficient in tools and technologies like <mark>HTML/CSS, Python, Java</mark>.
+                I'm always eager to collaborate on exciting projects—feel free to reach out!</p>
                 <div class="skills">
                     <span class="skill">HTML/CSS</span>
                     <span class="skill">Java</span>
                     <span class="skill">Python</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">AI/ML</span>
                 </div>
             </div>
         </div>
@@ -759,148 +842,146 @@ My journey began when I discovered my love for coding during college while build
     <section id="projects" class="projects">
         <div class="section-title">
             <h2>My Projects</h2>
-            <p>Check out some of my recent work</p>
+            <p>Check out some of my recent work in web development and Python automation</p>
         </div>
         <div class="projects-grid">
-            <!--Whatsapp prank-->
-            <div class="project-card">
+            <!-- Project 1 -->
+            <article class="project-card" itemscope itemtype="https://schema.org/CreativeWork">
                 <div class="project-img">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.Oe1shiqAtz1JbUNsROFXnQHaDM%3Fpid%3DApi&f=1&ipt=87f97a9291b7c831204eb8b898ff10e45cf216c67b3b9eb43f68409fb0a02e8e&ipo=image" alt="Project 1">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.Oe1shiqAtz1JbUNsROFXnQHaDM%3Fpid%3DApi&f=1&ipt=87f97a9291b7c831204eb8b898ff10e45cf216c67b3b9eb43f68409fb0a02e8e&ipo=image" 
+                         alt="WhatsApp Prank Automation Tool – Python GUI Project by Lokesh" loading="lazy">
                 </div>
                 <div class="project-info">
-                    <h3>Whatsapp prank automation</h3>
-                    <p>Built a WhatsApp Prank Automation tool with a GUI to send automated prank messages</p>
+                    <h3 itemprop="name">WhatsApp Prank Automation</h3>
+                    <p itemprop="description">Built a WhatsApp Prank Automation tool with a GUI to send automated prank messages</p>
                     <div class="project-tags">
                         <span class="project-tag">Python</span>
                         <span class="project-tag">JSON</span>
+                        <span class="project-tag">Automation</span>
                     </div>
-                    <a href="Auto_whatsapp_message.py" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    <a href="Auto_whatsapp_message.py" class="project-link" itemprop="url">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-            </div>
+            </article>
 
-            <!--Finai-->
-            <div class="project-card">
+            <!-- Project 2 -->
+            <article class="project-card" itemscope itemtype="https://schema.org/CreativeWork">
                 <div class="project-img">
-                    <img src="expence-track.png" alt="Project 2">
+                    <img src="expence-track.png" alt="Expense Tracker Web App – Budget Management Tool by Lokesh" loading="lazy">
                 </div>
                 <div class="project-info">
-                    <h3>Expence tracker</h3>
-                    <p>Build a responsive Expense Tracker web app with budget tracking, and goal-setting features.</p>
+                    <h3 itemprop="name">Expense Tracker</h3>
+                    <p itemprop="description">Build a responsive Expense Tracker web app with budget tracking, and goal-setting features.</p>
                     <div class="project-tags">
                         <span class="project-tag">HTML</span>
                         <span class="project-tag">CSS</span>
                         <span class="project-tag">JavaScript</span>
                     </div>
-                    <a href="Finai.html" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    <a href="Finai.html" class="project-link" itemprop="url">View Project <i class="fas fa-arrow-right"></i></a>
                 </div>
-            </div>
+            </article>
 
-            <!--Calculator-->
-            <div class="project-card">
+            <!-- Project 3 -->
+            <article class="project-card" itemscope itemtype="https://schema.org/CreativeWork">
                 <div class="project-img">
-                    <img src="calc.png" alt="Project 3">
+                    <img src="calc.png" alt="Interactive Calculator with Modern UI – JavaScript Project by Lokesh" loading="lazy">
                 </div>
                 <div class="project-info">
-                    <h3>Simple Calculator</h3>
-                    <p>Build an interactive Calculator with a modern UI features include dynamic button highlights, smooth animations, and real-time calculation with error handling.</p>
+                    <h3 itemprop="name">Simple Calculator</h3>
+                    <p itemprop="description">Interactive Calculator with dynamic button highlights, animations, and real-time calculation.</p>
                     <div class="project-tags">
                         <span class="project-tag">HTML</span>
                         <span class="project-tag">CSS</span>
                         <span class="project-tag">JavaScript</span>
                     </div>
-                    <a href="calc-with-nav-bar.html" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    <a href="calc-with-nav-bar.html" class="project-link" itemprop="url">View Project <i class="fas fa-arrow-right"></i></a>
                 </div>
-            </div>
+            </article>
 
-            <!--py calculator-->
-            <div class="project-card">
+            <!-- Project 4 -->
+            <article class="project-card" itemscope itemtype="https://schema.org/CreativeWork">
                 <div class="project-img">
-                    <img src="py-calc.png" alt="Project 4">
+                    <img src="py-calc.png" alt="Python GUI Calculator using Tkinter – Lokesh Project" loading="lazy">
                 </div>
                 <div class="project-info">
-                    <h3>Python Calculator</h3>
-                    <p>A GUI-based calculator built with Python's Tkinter library, featuring real-time input handling and arithmetic operations.</p>
+                    <h3 itemprop="name">Python Calculator</h3>
+                    <p itemprop="description">GUI-based calculator built with Python's Tkinter featuring real-time arithmetic operations.</p>
                     <div class="project-tags">
                         <span class="project-tag">Python</span>
+                        <span class="project-tag">Tkinter</span>
                     </div>
-                    <a href="calculator.py" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    <a href="calculator.py" class="project-link" itemprop="url">View Project <i class="fas fa-arrow-right"></i></a>
                 </div>
-            </div>
+            </article>
         </div>
     </section>
 
     <!-- Certificate Photos Section -->
     <section id="certificate-photos" class="certificate-photos">
         <div class="section-title">
-            <h2>Certificate Photos</h2>
-            <p>Visual documentation of my achievements and certifications</p>
+            <h2>Certificates</h2>
+            <p>Microsoft Azure AI Certified • Xebia Xe-Conclave • 2024</p>
         </div>
         <div class="certificate-gallery">
-
-            <!-- Certificate 1 -->
-            <div class="certificate-item" onclick="openModal('micro-1.jpg')">
-                <img src="micro-1.jpg" alt="Python Certificate">
-                <div class="certificate-overlay">
-                    <h3>Azure AI1</h3>
+            <figure class="certificate-item" onclick="openModal('micro-1.jpg')">
+                <img src="micro-1.jpg" alt="Microsoft Azure AI Fundamentals Certificate – Lokesh 2024" loading="lazy">
+                <figcaption class="certificate-overlay">
+                    <h3>Azure AI Fundamentals</h3>
                     <p>Microsoft • 2024</p>
-                </div>
-            </div>
-            
-            <!-- Certificate 2 -->
-            <div class="certificate-item" onclick="openModal('micro-2.jpg')">
-                <img src="micro-2.jpg" alt="Web Development Certificate">
-                <div class="certificate-overlay">
+                </figcaption>
+            </figure>
+
+            <figure class="certificate-item" onclick="openModal('micro-2.jpg')">
+                <img src="micro-2.jpg" alt="Microsoft Azure AI Certification – Lokesh 2024" loading="lazy">
+                <figcaption class="certificate-overlay">
                     <h3>Azure AI</h3>
                     <p>Microsoft • 2024</p>
-                </div>
-            </div>
+                </figcaption>
+            </figure>
 
-            <!-- Certificate 3 -->
-            <div class="certificate-item" onclick="openModal('Xe-Conclave.jpg')">
-                <img src="Xe-Conclave.jpg" alt="Python Certificate">
-                <div class="certificate-overlay">
+            <figure class="certificate-item" onclick="openModal('Xe-Conclave.jpg')">
+                <img src="Xe-Conclave.jpg" alt="Xebia Xe-Conclave Participation Certificate – Lokesh 2024" loading="lazy">
+                <figcaption class="certificate-overlay">
                     <h3>Xe-Conclave</h3>
                     <p>Xebia • 2024</p>
-                </div>
-            </div>
-            
+                </figcaption>
+            </figure>
         </div>
     </section>
 
-    <!-- Modal for certificate photos -->
-    <div id="certificateModal" class="modal">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
+    <!-- Modal -->
+    <div id="certificateModal" class="modal" role="dialog" aria-modal="true">
+        <span class="close-modal" onclick="closeModal()" aria-label="Close modal">×</span>
+        <img class="modal-content" id="modalImage" alt="Enlarged certificate view">
     </div>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="section-title">
             <h2>About Me</h2>
-            <p>My journey in web development</p>
+            <p>My journey in web development and computer science</p>
         </div>
         <div class="timeline">
-            <div class="timeline-item">
+            <article class="timeline-item">
                 <div class="timeline-content">
-                    <h3>front-end Developer</h3>
+                    <h3>Front-End Developer</h3>
                     <p>Currently learning and building projects with HTML, CSS, and JavaScript to create responsive and user-friendly websites.</p>
                 </div>
-            </div>
-
-            <div class="timeline-item">
+            </article>
+            <article class="timeline-item">
                 <div class="timeline-content">
                     <h3>Python Programming</h3>
                     <p>Exploring Python for problem-solving, automation, and GUI applications with Tkinter while strengthening core programming skills.</p>
                 </div>
-            </div>
-            
-            <div class="timeline-item">
+            </article>
+            <article class="timeline-item">
                 <div class="timeline-content">
                     <h3>Bachelor's in Computer Science</h3>
                     <p>Takshashila University • 2024 - 2027</p>
-                    <p>Currently pursuing studies in computer science with a focus on programming, software development, and web technologies.</p>
+                    <p>Pursuing studies in computer science with a focus on programming, software development, and web technologies.</p>
                 </div>
-            </div>
+            </article>
         </div>
     </section>
 
@@ -911,36 +992,31 @@ My journey began when I discovered my love for coding during college while build
         </div>
         <div class="contact-container">
             <div class="contact-info">
-                <!--Linked-->
                 <div class="contact-item">
                     <div class="contact-icon">
                         <i class="fab fa-linkedin"></i>
                     </div>
                     <div class="contact-details">
                         <h4>LinkedIn</h4>
-                        <p><a href="https://www.linkedin.com/in/lokesh-a-875b43323/">Check it</a></p>
+                        <p><a href="https://www.linkedin.com/in/lokesh-a-875b433323/" target="_blank" rel="noopener">linkedin.com/in/lokesh</a></p>
                     </div>
                 </div>
-
-                <!--Email-->
                 <div class="contact-item">
                     <div class="contact-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
                     <div class="contact-details">
                         <h4>Email</h4>
-                        <p>lokesh.8637427067@gmail.com</p>
+                        <p><a href="mailto:lokesh.8637427067@gmail.com">lokesh.8637427067@gmail.com</a></p>
                     </div>
                 </div>
-
-                <!--phone no-->
                 <div class="contact-item">
                     <div class="contact-icon">
                         <i class="fas fa-phone"></i>
                     </div>
                     <div class="contact-details">
                         <h4>Phone</h4>
-                        <p>+91 8637427067</p>
+                        <p><a href="tel:+918637427067">+91 86374 27067</a></p>
                     </div>
                 </div>
             </div>
@@ -954,16 +1030,16 @@ My journey began when I discovered my love for coding during college while build
             <ul class="footer-links">
                 <li><a href="#profile">Profile</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#certificate-photos">Certificate Photos</a></li>
+                <li><a href="#certificate-photos">Certificates</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="copyright">&copy; 2025 Lokesh. All rights reserved.</div>
+            <div class="copyright">© 2025 Lokesh. All rights reserved. | Web Developer in Chennai</div>
         </div>
     </footer>
 
     <script>
-        // Simple JavaScript for navbar scroll effect
+        // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -972,49 +1048,30 @@ My journey began when I discovered my love for coding during college while build
                 navbar.classList.remove('scrolled');
             }
         });
-        
-        // Animate hero text
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.querySelector('.hero h1').style.opacity = '1';
-                document.querySelector('.hero h1').style.transform = 'translateY(0)';
-                document.querySelector('.hero p').style.opacity = '1';
-                document.querySelector('.hero p').style.transform = 'translateY(0)';
-            }, 500);
-        });
-        
-        // Modal functionality for certificate photos
+
+        // Modal functionality
         function openModal(imageSrc) {
             const modal = document.getElementById('certificateModal');
             const modalImg = document.getElementById('modalImage');
             modal.style.display = 'flex';
             modalImg.src = imageSrc;
-            
-            // Prevent background scrolling when modal is open
             document.body.style.overflow = 'hidden';
         }
-        
+
         function closeModal() {
             const modal = document.getElementById('certificateModal');
             modal.style.display = 'none';
-            
-            // Re-enable background scrolling
             document.body.style.overflow = 'auto';
         }
-        
-        // Close modal when clicking outside the image
+
+        // Close modal on outside click or Escape
         window.onclick = function(event) {
             const modal = document.getElementById('certificateModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-        
-        // Close modal with Escape key
+            if (event.target == modal) closeModal();
+        };
+
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
+            if (event.key === 'Escape') closeModal();
         });
     </script>
 </body>
