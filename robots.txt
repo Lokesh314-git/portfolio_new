@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lokesh314-git.github.io/portfolio_new/sitemap.xml
