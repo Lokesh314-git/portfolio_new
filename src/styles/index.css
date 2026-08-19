@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0f172a] text-slate-100 font-sans antialiased overflow-x-hidden;
+  }
+}
+
+/* Custom Soft Neumorphic Shadows & Utilities */
+.shadow-neu-flat {
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.4), -6px -6px 14px rgba(255, 255, 255, 0.05);
+}
+
+.shadow-neu-pressed {
+  box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.5), inset -4px -4px 10px rgba(255, 255, 255, 0.05);
+}
+
+.shadow-neu-glow {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
+}
+
+.border-neu {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 3D Realistic Book Page Flip Animations */
+@keyframes pageFlipNext {
+  0% {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+  45% {
+    transform: perspective(1400px) rotateY(-75deg);
+    opacity: 0.5;
+    box-shadow: -20px 10px 40px rgba(0, 0, 0, 0.7);
+  }
+  100% {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes pageFlipPrev {
+  0% {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+  45% {
+    transform: perspective(1400px) rotateY(75deg);
+    opacity: 0.5;
+    box-shadow: 20px 10px 40px rgba(0, 0, 0, 0.7);
+  }
+  100% {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.animate-page-flip-next {
+  animation: pageFlipNext 0.45s ease-in-out forwards;
+  transform-origin: left center;
+}
+
+.animate-page-flip-prev {
+  animation: pageFlipPrev 0.45s ease-in-out forwards;
+  transform-origin: right center;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.3; }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
